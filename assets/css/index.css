@@ -1,0 +1,224 @@
+/* TENG - GLOBAL STYLES & ANIMATIONS */
+body {
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  background-color: #f8fafc;
+  scroll-behavior: smooth;
+}
+
+/* Background gradient Hero (Đúng màu ảnh gốc) */
+.hero-bg {
+  background: radial-gradient(circle at 50% 40%, #2563eb 0%, #1e3a8a 80%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Radar effect */
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 150px rgba(255, 255, 255, 0.05),
+    0 0 0 300px rgba(255, 255, 255, 0.02);
+  pointer-events: none;
+}
+
+/* Animations cơ bản */
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(3deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float 6s ease-in-out infinite 2s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+/* Buttons & Cards */
+.glow-btn {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+.glow-btn:hover {
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+  transform: scale(1.05);
+}
+
+.card-float {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-float:hover {
+  transform: translateY(-10px);
+}
+.btn-press:active {
+  transform: scale(0.95);
+}
+
+/* ========================================================= */
+/* HIỆU ỨNG 2 HÀNG HỌC VIÊN CHẠY NGƯỢC NHAU (MARQUEE)         */
+/* ========================================================= */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+}
+
+.marquee-wrapper {
+  display: flex;
+  width: max-content; /* Rất quan trọng để nội dung tự giãn dài vô tận */
+}
+
+/* Hàng 1: Chạy từ Phải sang Trái */
+.marquee-left {
+  animation: scrollLeft 45s linear infinite;
+}
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Hàng 2: Chạy từ Trái sang Phải */
+.marquee-right {
+  animation: scrollRight 45s linear infinite;
+  transform: translateX(-50%);
+}
+@keyframes scrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Dừng lại khi hover để xem kỹ học viên */
+.marquee-container:hover .marquee-wrapper {
+  animation-play-state: paused;
+}
+
+/* Thẻ học viên bên trong khung chạy */
+.student-card {
+  width: 220px;
+  height: 310px;
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  margin: 0 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background-color: #1e3a8a;
+}
+.student-card .bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.student-card:hover .bg-img {
+  transform: scale(1.05); /* Zoom ảnh khi hover */
+}
+
+/* Nhãn hiển thị mặc định ở dưới cùng */
+.student-card .default-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px 12px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.student-card:hover .default-label {
+  opacity: 0;
+}
+
+/* Lớp chi tiết trượt lên khi hover */
+.student-card .hover-details {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(30, 58, 138, 0.95);
+  color: white;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.student-card:hover .hover-details {
+  transform: translateY(0);
+}
+
+/* Modal Animations */
+.hidden-step {
+  display: none !important;
+}
+
+/* Thanh cuộn web */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}

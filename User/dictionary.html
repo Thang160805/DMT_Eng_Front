@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ điển - TENG</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/dictionary.css" />
+  </head>
+  <body class="bg-gray-50 font-['Inter']">
+    <header
+      class="w-full flex justify-between items-center px-8 h-[72px] bg-[#1e3a8a] text-white sticky top-0 z-50 shadow-md"
+    >
+      <div class="flex items-center gap-8">
+        <a
+          href="../User/index.html"
+          class="font-bold text-3xl flex items-center gap-2 text-white hover:text-blue-200 transition"
+          ><i class="fa-solid fa-graduation-cap"></i> TENG</a
+        >
+        <nav class="hidden lg:flex gap-6 text-sm font-medium text-blue-200">
+          <a href="../User/course-details.html" class="hover:text-white transition"
+            >Khóa học</a
+          >
+          <a
+            href="../User/dictionary.html"
+            class="text-white font-bold border-b-2 border-white pb-1"
+            >Từ điển</a
+          >
+        </nav>
+      </div>
+      <div class="flex items-center gap-6">
+        <button
+          onclick="window.location.href = '../User/course-details.html'"
+          class="bg-blue-500 hover:bg-blue-400 text-white px-5 py-2 rounded-full text-sm font-semibold transition shadow-md"
+        >
+          Bắt đầu học
+        </button>
+        <div class="relative inline-block text-left z-50 group">
+          <div
+            class="w-10 h-10 bg-blue-600 text-white rounded-full flex justify-center items-center cursor-pointer shadow-lg hover:scale-105 transition text-sm border-2 border-transparent hover:border-blue-300"
+          >
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="absolute right-0 top-10 w-full h-6 bg-transparent"></div>
+          <div
+            class="absolute right-0 top-[calc(100%+0.5rem)] w-56 bg-white rounded-2xl shadow-[0_15px_50px_rgba(0,0,0,0.15)] border border-gray-100 py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform scale-95 group-hover:scale-100 transition-all duration-200 origin-top-right z-50"
+          >
+            <div class="px-5 py-2 border-b border-gray-100 mb-2">
+              <p class="text-sm font-black text-blue-900">Học viên TENG</p>
+            </div>
+            <a
+              href="../User/profile.html"
+              class="flex items-center gap-3 px-5 py-2.5 text-sm font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
+              ><i class="fa-solid fa-address-card text-lg w-5"></i> Trang cá
+              nhân</a
+            >
+            <a
+              href="../User/course-details.html"
+              class="flex items-center gap-3 px-5 py-2.5 text-sm font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
+              ><i class="fa-solid fa-book-open text-lg w-5"></i> Khóa học của
+              tôi</a
+            >
+            <div class="h-px bg-gray-200 my-2"></div>
+            <a
+              href="../User/index.html"
+              class="w-full text-left flex items-center gap-3 px-5 py-2.5 text-sm font-bold text-red-500 hover:bg-red-50 hover:text-red-600 transition"
+              ><i class="fa-solid fa-arrow-right-from-bracket text-lg w-5"></i>
+              Đăng xuất</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div
+      id="dictHeroView"
+      class="dict-hero-bg min-h-[85vh] flex flex-col items-center pt-24 px-4 text-white relative transition-all duration-500"
+    >
+      <div class="shining-star hidden md:block"></div>
+      <div class="text-center mb-10 z-10">
+        <h1
+          class="text-5xl md:text-6xl font-bold tracking-tight mb-4 drop-shadow-lg"
+        >
+          Tra từ dễ dàng <br />
+          hiểu nghĩa sâu xa
+        </h1>
+      </div>
+      <div
+        class="w-full max-w-3xl bg-white rounded-full p-2 flex items-center shadow-2xl z-10 relative"
+      >
+        <div
+          class="flex items-center gap-2 px-4 border-r border-gray-200 text-gray-600 font-semibold"
+        >
+          EN - VI
+        </div>
+        <input
+          type="text"
+          id="mainSearchInput"
+          placeholder="Bạn muốn tra từ gì?"
+          class="flex-1 px-6 py-3 text-gray-800 outline-none text-lg bg-transparent"
+          onkeypress="handleEnter(event, false)"
+        /><button
+          onclick="performSearch(false)"
+          class="px-6 py-3 text-blue-600 font-bold hover:bg-blue-50 rounded-r-full transition"
+        >
+          Ngẫu nhiên
+        </button>
+      </div>
+      <div class="w-full max-w-3xl flex mt-16 z-10">
+        <div
+          class="flex-1 bg-white rounded-3xl p-8 relative shadow-2xl text-gray-800 cursor-pointer"
+          onclick="
+            document.getElementById('mainSearchInput').value = 'parliament';
+            performSearch(false);
+          "
+        >
+          <div
+            class="absolute -top-3 right-6 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-full"
+          >
+            Word of the day
+          </div>
+          <h2 class="text-3xl font-bold mb-2">parliament</h2>
+          <p class="text-sm font-medium text-gray-600">
+            A group of people, usually elected, who make the laws for their
+            country.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="dictResultsView"
+      class="hidden min-h-screen bg-gray-50 pb-20 transition-all duration-500"
+    >
+      <div
+        class="w-full bg-[#eff6ff] py-4 border-b border-blue-100 flex justify-center sticky top-[72px] z-40 shadow-sm"
+      >
+        <div
+          class="w-full max-w-4xl bg-white rounded-full p-1.5 flex items-center shadow-md border border-gray-200"
+        >
+          <input
+            type="text"
+            id="topSearchInput"
+            value="walkie-talkie"
+            class="flex-1 px-4 py-2 text-gray-800 outline-none text-base bg-transparent font-medium"
+            onkeypress="handleEnter(event, true)"
+          /><button
+            onclick="performSearch(true)"
+            class="bg-blue-100 text-blue-600 px-5 py-2 rounded-full text-sm font-semibold transition"
+          >
+            Tìm kiếm
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="successContent"
+        class="max-w-6xl mx-auto px-6 mt-8 hidden flex-col md:flex-row gap-8 items-start"
+      >
+        <div class="w-full md:w-3/4 flex flex-col gap-4">
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8"
+          >
+            <div class="mb-6">
+              <h1
+                class="text-3xl font-bold text-blue-600 capitalize"
+                id="resultTitle"
+              >
+                walkie-talkie
+              </h1>
+            </div>
+            <div class="mb-8">
+              <p class="text-gray-800 font-medium text-base mb-1">
+                A small, handheld radio device used to send and get messages.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="notFoundContent"
+        class="max-w-4xl mx-auto px-6 mt-16 hidden flex-col items-center justify-center text-center"
+      >
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">
+          Không tìm thấy kết quả phù hợp cho
+        </h2>
+        <h2 class="text-2xl font-bold text-blue-500 mb-8">
+          "<span id="errorWordDisplay">hld</span>"
+        </h2>
+      </div>
+    </div>
+
+    <script>
+      function handleEnter(e, isTopBar) {
+        if (e.key === "Enter") performSearch(isTopBar);
+      }
+      function performSearch(isTopBar) {
+        const heroView = document.getElementById("dictHeroView");
+        const resultsView = document.getElementById("dictResultsView");
+        const successContent = document.getElementById("successContent");
+        const notFoundContent = document.getElementById("notFoundContent");
+        const mainInput = document.getElementById("mainSearchInput");
+        const topInput = document.getElementById("topSearchInput");
+        let keyword = isTopBar ? topInput.value.trim() : mainInput.value.trim();
+        if (!isTopBar) topInput.value = keyword;
+        if (keyword === "") return;
+
+        if (keyword.toLowerCase() === "hld") {
+          successContent.classList.add("hidden");
+          successContent.classList.remove("flex");
+          notFoundContent.classList.remove("hidden");
+          notFoundContent.classList.add("flex");
+          document.getElementById("errorWordDisplay").innerText = keyword;
+        } else {
+          successContent.classList.remove("hidden");
+          successContent.classList.add("flex");
+          notFoundContent.classList.add("hidden");
+          notFoundContent.classList.remove("flex");
+          document.getElementById("resultTitle").innerText = keyword;
+        }
+
+        if (!heroView.classList.contains("hidden")) {
+          heroView.classList.add("fade-out-up");
+          setTimeout(() => {
+            heroView.classList.add("hidden");
+            heroView.classList.remove("flex");
+            resultsView.classList.remove("hidden");
+            resultsView.classList.add("fade-in-up-dict");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }, 400);
+        }
+      }
+    </script>
+  </body>
+</html>

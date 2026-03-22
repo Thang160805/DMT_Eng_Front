@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TENG - Nền tảng Học & Luyện thi thông minh</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/index.css" />
+  </head>
+  <body class="font-['Inter'] overflow-x-hidden text-gray-800 bg-gray-50">
+    <div class="hero-bg w-full min-h-screen text-white flex flex-col relative overflow-hidden">
+      <header
+        class="w-full flex justify-between items-center px-8 h-20 relative z-20"
+      >
+        <div class="flex items-center gap-8">
+          <a
+            href="../User/index.html"
+            class="font-bold text-3xl flex items-center gap-2 text-white hover:text-blue-200 transition"
+          >
+            <i class="fa-solid fa-graduation-cap"></i> TENG
+          </a>
+          <nav class="hidden lg:flex gap-6 text-sm font-medium text-blue-100">
+            <a
+              href="../User/course-details.html"
+              class="hover:text-white transition py-2"
+              >Khóa học <i class="fa-solid fa-caret-down text-[10px]"></i
+            ></a>
+            <a href="#" class="hover:text-white transition py-2"
+              >Kiểm tra đầu vào
+              <i class="fa-solid fa-caret-down text-[10px]"></i
+            ></a>
+            <a href="#" class="hover:text-white transition py-2"
+              >Luyện đề <i class="fa-solid fa-caret-down text-[10px]"></i
+            ></a>
+            <a href="#" class="hover:text-white transition py-2"
+              >Doanh nghiệp</a
+            >
+            <a href="../User/dictionary.html" class="hover:text-white transition py-2"
+              >Từ điển</a
+            >
+            <a href="#" class="hover:text-white transition py-2"
+              >Blog <i class="fa-solid fa-caret-down text-[10px]"></i
+            ></a>
+            <a href="#" class="hover:text-white transition py-2"
+              >Tin tức <i class="fa-solid fa-caret-down text-[10px]"></i
+            ></a>
+          </nav>
+        </div>
+
+        <div>
+          <div id="navUnlogged" class="flex items-center gap-4">
+            <button
+              onclick="openAuthModal('stepLogin')"
+              class="bg-blue-500 hover:bg-blue-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition shadow-md btn-press"
+            >
+              Đăng nhập
+            </button>
+          </div>
+          <div id="navLogged" class="hidden items-center gap-4">
+            <button
+              onclick="window.location.href = 'course-details.html'"
+              class="bg-blue-500 hover:bg-blue-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition shadow-md btn-press"
+            >
+              Bắt đầu học
+            </button>
+
+            <div class="relative inline-block text-left z-50 group">
+              <div
+                class="w-10 h-10 bg-white text-blue-700 rounded-full flex justify-center items-center cursor-pointer shadow-lg hover:scale-105 transition btn-press text-lg border-2 border-transparent hover:border-blue-300"
+              >
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div
+                class="absolute right-0 top-10 w-full h-6 bg-transparent"
+              ></div>
+              <div
+                class="absolute right-0 top-[calc(100%+0.5rem)] w-56 bg-white rounded-2xl shadow-[0_15px_50px_rgba(0,0,0,0.15)] border border-gray-100 py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform scale-95 group-hover:scale-100 transition-all duration-200 origin-top-right"
+              >
+                <div class="px-5 py-2 border-b border-gray-100 mb-2">
+                  <p class="text-sm font-black text-blue-900">Học viên TENG</p>
+                </div>
+                <a
+                  href="../User/profile.html"
+                  class="flex items-center gap-3 px-5 py-2 text-sm font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                  ><i class="fa-solid fa-address-card text-lg w-5"></i> Trang cá
+                  nhân</a
+                >
+                <a
+                  href="../User/course-details.html"
+                  class="flex items-center gap-3 px-5 py-2 text-sm font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                  ><i class="fa-solid fa-book-open text-lg w-5"></i> Khóa học
+                  của tôi</a
+                >
+                <div class="h-px bg-gray-200 my-2"></div>
+                <button
+                  onclick="handleLogout()"
+                  class="w-full text-left flex items-center gap-3 px-5 py-2 text-sm font-bold text-red-500 hover:bg-red-50 hover:text-red-600 transition"
+                >
+                  <i
+                    class="fa-solid fa-arrow-right-from-bracket text-lg w-5"
+                  ></i>
+                  Đăng xuất
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div
+        class="flex-1 flex flex-col items-center justify-center text-center px-4 relative z-10 -mt-10"
+      >
+        <div
+          class="absolute top-10 right-[25%] text-5xl text-blue-300 opacity-80 animate-float drop-shadow-lg"
+        >
+          <i class="fa-solid fa-headphones"></i>
+        </div>
+        <div
+          class="absolute bottom-32 left-[25%] text-4xl text-yellow-400 opacity-90 animate-float-delayed drop-shadow-lg"
+        >
+          <i class="fa-solid fa-microphone-lines"></i>
+        </div>
+        <div
+          class="absolute top-1/4 left-[35%] w-16 h-16 bg-white/10 rounded-full blur-xl animate-float"
+        ></div>
+
+        <h1
+          class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 fade-in-up"
+        >
+          Nền tảng Học <br />
+          <span class="text-yellow-300">và Luyện thi</span> <br />
+          thông minh
+        </h1>
+
+        <div class="fade-in-up delay-100 mb-10 text-8xl drop-shadow-2xl">
+          <img src="https://prepedu.com/_next/image?url=%2Fimages%2Fbee%2Fbee_speaking.png&w=480&q=95">
+        </div>
+
+        <button
+          class="bg-white text-blue-600 px-10 py-4 rounded-full font-bold text-lg glow-btn fade-in-up delay-200 btn-press"
+        >
+          KHÁM PHÁ NGAY
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-20">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+        <h2
+          class="text-4xl font-extrabold text-[#1e3a8a] max-w-md leading-tight"
+        >
+          Tinh thông mọi ngôn ngữ với bộ chương trình đào tạo chất lượng cao
+        </h2>
+        <p
+          class="text-gray-500 max-w-sm text-sm border-l-2 border-blue-500 pl-4 mt-4 md:mt-0"
+        >
+          Học ngoại ngữ thật dễ dàng với lộ trình Học & Luyện Thi toàn diện,
+          được cá nhân hóa riêng biệt.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          onclick="window.location.href = 'course-details.html'"
+          class="bg-gradient-to-br from-orange-400 to-orange-600 p-8 rounded-3xl text-white shadow-xl hover:-translate-y-2 transition duration-300 h-64 flex flex-col justify-between card-float cursor-pointer"
+        >
+          <div>
+            <h3 class="font-bold text-2xl mb-2">TENG Junior</h3>
+            <p class="text-xs text-orange-100 opacity-90">
+              Lộ trình học tinh gọn dành cho học sinh cấp 2.
+            </p>
+          </div>
+          <div
+            class="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center transition"
+          >
+            <i class="fa-solid fa-chevron-up"></i>
+          </div>
+        </div>
+
+        <div
+          onclick="window.location.href = 'course-details.html'"
+          class="bg-gradient-to-br from-blue-500 to-blue-700 p-8 rounded-3xl text-white shadow-xl hover:-translate-y-2 transition duration-300 h-64 flex flex-col justify-between card-float cursor-pointer"
+        >
+          <div>
+            <h3 class="font-bold text-2xl mb-2">VSTEP</h3>
+            <p class="text-xs text-blue-100 opacity-90">
+              Lộ trình học từ cơ bản đến nâng cao, bám sát cấu trúc đề thi.
+            </p>
+          </div>
+          <div
+            class="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center transition"
+          >
+            <i class="fa-solid fa-chevron-up"></i>
+          </div>
+        </div>
+
+        <div
+          onclick="window.location.href = 'course-details.html'"
+          class="bg-gradient-to-br from-blue-700 to-blue-900 p-8 rounded-3xl text-white shadow-xl hover:-translate-y-2 transition duration-300 h-64 flex flex-col justify-between card-float cursor-pointer"
+        >
+          <div>
+            <h3 class="font-bold text-2xl mb-2">IELTS</h3>
+            <p class="text-xs text-blue-100 opacity-90">
+              Mục tiêu điểm 7.0+ dễ dàng, chấm chữa chi tiết cùng giáo viên AI.
+            </p>
+          </div>
+          <div
+            class="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center transition"
+          >
+            <i class="fa-solid fa-chevron-up"></i>
+          </div>
+        </div>
+
+        <div
+          onclick="window.location.href = 'course-details.html'"
+          class="bg-gradient-to-br from-green-500 to-green-700 p-8 rounded-3xl text-white shadow-xl hover:-translate-y-2 transition duration-300 h-64 flex flex-col justify-between card-float cursor-pointer"
+        >
+          <div>
+            <h3 class="font-bold text-2xl mb-2">HSK</h3>
+            <p class="text-xs text-green-100 opacity-90">
+              Hệ thống bài giảng tiếng Trung chuẩn quốc tế, tự tin giao tiếp.
+            </p>
+          </div>
+          <div
+            class="w-10 h-10 bg-white text-green-600 rounded-full flex items-center justify-center transition shadow-lg"
+          >
+            <i class="fa-solid fa-play ml-1"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-10">
+      <div
+        class="bg-[#0f172a] rounded-[2.5rem] p-12 md:p-20 text-white shadow-2xl relative overflow-hidden h-[400px] flex items-center"
+      >
+        <div class="max-w-xl relative z-10">
+          <h2 class="text-3xl md:text-4xl font-bold leading-snug mb-6">
+            Được đánh giá cao bởi hàng trăm nghìn học viên đã và đang theo học
+          </h2>
+          <p class="text-blue-200 text-sm leading-relaxed">
+            Đây chính là sự ghi nhận lớn nhất với TENG để TENG có động lực cải
+            tiến không ngừng nghỉ và đem đến trải nghiệm học tập tuyệt vời nhất
+            dành cho bạn.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bg-white py-24 border-t border-b border-gray-200 overflow-hidden relative mt-10"
+    >
+      <div class="text-center mb-16 relative z-10">
+        <h2
+          class="text-4xl md:text-5xl font-black text-[#1e3a8a] mb-4 uppercase tracking-widest"
+        >
+          Bảng Vàng Danh Dự
+        </h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
+          Vinh danh 27 cá nhân xuất sắc của lớp
+          <b class="text-blue-600">64K CNTT CLC</b> đạt điểm cao nhờ nền tảng
+          TENG.
+        </p>
+      </div>
+
+      <div class="marquee-container mb-8">
+        <div class="marquee-wrapper marquee-left">
+          <div class="student-card">
+            <img
+              src="https://ui-avatars.com/api/?name=Bảo+An&background=2563eb&color=fff&size=512"
+              alt="Avatar"
+              class="bg-img"
+            />
+            <div class="default-label">
+              <div>
+                <h4
+                  class="text-white font-bold text-base shadow-black drop-shadow-md"
+                >
+                  Nguyễn Đình<br />Bảo An
+                </h4>
+              </div>
+              <div
+                class="bg-blue-600 text-white text-[11px] font-black px-2 py-1 rounded w-max shadow-lg"
+              >
+                IELTS 8.0
+              </div>
+            </div>
+            <div class="hover-details">
+              <h4 class="font-bold text-lg mb-3 border-b border-white/20 pb-2">
+                Nguyễn Đình Bảo An
+              </h4>
+              <div class="grid grid-cols-2 gap-y-2 gap-x-2 mb-2">
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Speaking</span
+                  ><span class="font-black text-base">8.0</span>
+                </div>
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Listening</span
+                  ><span class="font-black text-base">8.5</span>
+                </div>
+              </div>
+              <p class="text-[11px] italic text-blue-100 mt-1">
+                "Nền tảng TENG đỉnh cao."
+              </p>
+            </div>
+          </div>
+          <div class="student-card">
+            <img
+              src="https://ui-avatars.com/api/?name=Việt+Anh&background=1e40af&color=fff&size=512"
+              alt="Avatar"
+              class="bg-img"
+            />
+            <div class="default-label">
+              <div>
+                <h4
+                  class="text-white font-bold text-base shadow-black drop-shadow-md"
+                >
+                  Phan<br />Việt Anh
+                </h4>
+              </div>
+              <div
+                class="bg-blue-600 text-white text-[11px] font-black px-2 py-1 rounded w-max shadow-lg"
+              >
+                TOEIC 950
+              </div>
+            </div>
+            <div class="hover-details">
+              <h4 class="font-bold text-lg mb-3 border-b border-white/20 pb-2">
+                Phan Việt Anh
+              </h4>
+              <div class="grid grid-cols-2 gap-y-2 gap-x-2 mb-2">
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Reading</span
+                  ><span class="font-black text-base">480</span>
+                </div>
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Listening</span
+                  ><span class="font-black text-base">470</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="student-card">
+            <img
+              src="https://ui-avatars.com/api/?name=Anh+Bảo&background=047857&color=fff&size=512"
+              alt="Avatar"
+              class="bg-img"
+            />
+            <div class="default-label">
+              <div>
+                <h4
+                  class="text-white font-bold text-base shadow-black drop-shadow-md"
+                >
+                  Trần Đình<br />Anh Bảo
+                </h4>
+              </div>
+              <div
+                class="bg-blue-600 text-white text-[11px] font-black px-2 py-1 rounded w-max shadow-lg"
+              >
+                IELTS 7.5
+              </div>
+            </div>
+            <div class="hover-details">
+              <h4 class="font-bold text-lg mb-3 border-b border-white/20 pb-2">
+                Trần Đình Anh Bảo
+              </h4>
+              <div class="grid grid-cols-2 gap-y-2 gap-x-2 mb-2">
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Speaking</span
+                  ><span class="font-black text-base">7.0</span>
+                </div>
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Writing</span
+                  ><span class="font-black text-base">7.5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="student-card">
+            <img
+              src="https://ui-avatars.com/api/?name=Hữu+Công&background=b45309&color=fff&size=512"
+              alt="Avatar"
+              class="bg-img"
+            />
+            <div class="default-label">
+              <div>
+                <h4
+                  class="text-white font-bold text-base shadow-black drop-shadow-md"
+                >
+                  Bùi<br />Hữu Công
+                </h4>
+              </div>
+              <div
+                class="bg-blue-600 text-white text-[11px] font-black px-2 py-1 rounded w-max shadow-lg"
+              >
+                VSTEP C1
+              </div>
+            </div>
+            <div class="hover-details">
+              <h4 class="font-bold text-lg mb-3 border-b border-white/20 pb-2">
+                Bùi Hữu Công
+              </h4>
+              <div class="grid grid-cols-2 gap-y-2 gap-x-2 mb-2">
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Speaking</span
+                  ><span class="font-black text-base">8.5</span>
+                </div>
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Listening</span
+                  ><span class="font-black text-base">8.0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="student-card">
+            <img
+              src="https://ui-avatars.com/api/?name=Xuân+Duẩn&background=be185d&color=fff&size=512"
+              alt="Avatar"
+              class="bg-img"
+            />
+            <div class="default-label">
+              <div>
+                <h4
+                  class="text-white font-bold text-base shadow-black drop-shadow-md"
+                >
+                  Đậu<br />Xuân Duẩn
+                </h4>
+              </div>
+              <div
+                class="bg-blue-600 text-white text-[11px] font-black px-2 py-1 rounded w-max shadow-lg"
+              >
+                IELTS 7.0
+              </div>
+            </div>
+            <div class="hover-details">
+              <h4 class="font-bold text-lg mb-3 border-b border-white/20 pb-2">
+                Đậu Xuân Duẩn
+              </h4>
+              <div class="grid grid-cols-2 gap-y-2 gap-x-2 mb-2">
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Speaking</span
+                  ><span class="font-black text-base">7.0</span>
+                </div>
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Writing</span
+                  ><span class="font-black text-base">6.5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="student-card">
+            <img
+              src="https://ui-avatars.com/api/?name=Đình+Dương&background=0f766e&color=fff&size=512"
+              alt="Avatar"
+              class="bg-img"
+            />
+            <div class="default-label">
+              <div>
+                <h4
+                  class="text-white font-bold text-base shadow-black drop-shadow-md"
+                >
+                  Bùi Đình<br />Dương
+                </h4>
+              </div>
+              <div
+                class="bg-blue-600 text-white text-[11px] font-black px-2 py-1 rounded w-max shadow-lg"
+              >
+                HSK 5
+              </div>
+            </div>
+            <div class="hover-details">
+              <h4 class="font-bold text-lg mb-3 border-b border-white/20 pb-2">
+                Bùi Đình Dương
+              </h4>
+              <div class="grid grid-cols-2 gap-y-2 gap-x-2 mb-2">
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Reading</span
+                  ><span class="font-black text-base">90</span>
+                </div>
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Listening</span
+                  ><span class="font-black text-base">95</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="student-card">
+            <img
+              src="https://ui-avatars.com/api/?name=Sỹ+Đông&background=2563eb&color=fff&size=512"
+              alt="Avatar"
+              class="bg-img"
+            />
+            <div class="default-label">
+              <div>
+                <h4
+                  class="text-white font-bold text-base shadow-black drop-shadow-md"
+                >
+                  Hồ Sỹ<br />Đông
+                </h4>
+              </div>
+              <div
+                class="bg-blue-600 text-white text-[11px] font-black px-2 py-1 rounded w-max shadow-lg"
+              >
+                IELTS 7.5
+              </div>
+            </div>
+            <div class="hover-details">
+              <h4 class="font-bold text-lg mb-3 border-b border-white/20 pb-2">
+                Hồ Sỹ Đông
+              </h4>
+              <div class="grid grid-cols-2 gap-y-2 gap-x-2 mb-2">
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Speaking</span
+                  ><span class="font-black text-base">7.5</span>
+                </div>
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Writing</span
+                  ><span class="font-black text-base">7.0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="student-card">
+            <img
+              src="https://ui-avatars.com/api/?name=Văn+Đức&background=1e3a8a&color=fff&size=512"
+              alt="Avatar"
+              class="bg-img"
+            />
+            <div class="default-label">
+              <div>
+                <h4
+                  class="text-white font-bold text-base shadow-black drop-shadow-md"
+                >
+                  Nguyễn Văn<br />Đức
+                </h4>
+              </div>
+              <div
+                class="bg-blue-600 text-white text-[11px] font-black px-2 py-1 rounded w-max shadow-lg"
+              >
+                TOEIC 900
+              </div>
+            </div>
+            <div class="hover-details">
+              <h4 class="font-bold text-lg mb-3 border-b border-white/20 pb-2">
+                Nguyễn Văn Đức
+              </h4>
+              <div class="grid grid-cols-2 gap-y-2 gap-x-2 mb-2">
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Reading</span
+                  ><span class="font-black text-base">450</span>
+                </div>
+                <div>
+                  <span
+                    class="text-blue-300 block text-[9px] uppercase font-bold"
+                    >Listening</span
+                  ><span class="font-black text-base">450</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-white pt-16 pb-12 border-t border-gray-200">
+      <div
+        class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10"
+      >
+        <div>
+          <h4 class="font-bold text-gray-900 mb-5 text-sm uppercase">
+            Đội ngũ phát triển
+          </h4>
+          <ul class="flex flex-col gap-4 text-sm text-gray-600 font-medium">
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-code text-blue-500"></i> Nguyễn Khánh Duy
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-code text-blue-500"></i> Nguyễn Trọng Mạnh
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-code text-blue-500"></i> Hoàng Minh Thắng
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-5 text-sm uppercase">
+            CHƯƠNG TRÌNH HỌC
+          </h4>
+          <ul class="flex flex-col gap-3 text-sm text-gray-600 font-medium">
+            <li><a href="#" class="hover:text-blue-600">IELTS</a></li>
+            <li><a href="#" class="hover:text-blue-600">TOEIC</a></li>
+            <li><a href="#" class="hover:text-blue-600">HSK</a></li>
+            <li>
+              <a href="#" class="hover:text-blue-600">Tiếng Anh Giao Tiếp</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-5 text-sm uppercase">
+            HƯỚNG DẪN SỬ DỤNG
+          </h4>
+          <ul class="flex flex-col gap-3 text-sm text-gray-600 font-medium">
+            <li>
+              <a href="#" class="hover:text-blue-600">Cách mua khóa học</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-blue-600">Cách sử dụng TENG AI</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-5 text-sm uppercase">
+            THÔNG TIN LIÊN HỆ
+          </h4>
+          <ul class="flex flex-col gap-4 text-sm text-gray-600 font-medium">
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-building-columns text-blue-500 mt-1"></i>
+              <span
+                >Lớp 64K Công Nghệ Thông Tin CLC<br /><strong
+                  >Đại học Vinh</strong
+                ></span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-location-dot text-blue-500 mt-1 px-1"></i>
+              <span>182 Lê Duẩn, TP Vinh, Nghệ An</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500"
+      >
+        &copy; 2024 TENG Project. Developed with
+        <i class="fa-solid fa-heart text-red-500 mx-1"></i> by 64K CNTT CLC.
+      </div>
+    </footer>
+
+    <div
+      id="authModal"
+      class="fixed inset-0 bg-blue-900/80 z-[100] flex items-center justify-center opacity-0 invisible transition-all duration-400 backdrop-blur-md"
+    >
+      <div
+        class="bg-white rounded-[2.5rem] w-[90%] max-w-[500px] max-h-[90vh] overflow-y-auto p-12 relative shadow-2xl transform scale-95 transition-all duration-400"
+        id="modalBox"
+      >
+        <button
+          onclick="closeModal()"
+          class="absolute top-6 right-6 w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-red-100 hover:text-red-500 transition text-xl"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div id="stepChoice" class="block">
+          <div class="flex justify-center mb-8 mt-4">
+            <div
+              class="text-5xl font-black text-blue-600 flex items-center gap-3 drop-shadow-md"
+            >
+              <i class="fa-solid fa-graduation-cap"></i> TENG
+            </div>
+          </div>
+          <h3
+            class="text-center font-bold text-xl text-gray-800 mb-12 px-2 leading-relaxed"
+          >
+            Tham gia ngay cùng TENG <br />
+            Nền tảng học thông minh số 1
+          </h3>
+          <div class="flex flex-col gap-5 mb-8">
+            <button
+              onclick="showStep('stepLogin')"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-lg py-5 rounded-2xl transition shadow-lg"
+            >
+              Đăng nhập
+            </button>
+            <button
+              onclick="showStep('stepRegister')"
+              class="w-full bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-black text-lg py-5 rounded-2xl transition shadow-sm"
+            >
+              Đăng ký tài khoản
+            </button>
+          </div>
+        </div>
+
+        <div id="stepLogin" class="hidden">
+          <div class="flex justify-between items-center mb-12">
+            <button
+              onclick="showStep('stepChoice')"
+              class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200 transition text-lg"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h3 class="font-black text-3xl text-blue-900">Đăng nhập</h3>
+            <div class="w-10"></div>
+          </div>
+          <form
+            onsubmit="
+              event.preventDefault();
+              executeAuth();
+            "
+            class="flex flex-col gap-6"
+          >
+            <div class="flex flex-col gap-2">
+              <label
+                class="text-sm font-bold text-gray-500 uppercase tracking-wider"
+                >Số điện thoại</label
+              >
+              <input
+                type="text"
+                value="+84812733900"
+                class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none focus:bg-white transition shadow-inner font-bold text-lg"
+              />
+            </div>
+            <div class="flex flex-col gap-2 relative">
+              <div class="flex justify-between">
+                <label
+                  class="text-sm font-bold text-gray-500 uppercase tracking-wider"
+                  >Mật khẩu</label
+                ><a
+                  href="#"
+                  class="text-sm font-bold text-blue-600 hover:underline"
+                  >Quên mật khẩu?</a
+                >
+              </div>
+              <input
+                type="password"
+                id="loginPwd"
+                value="123456"
+                class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none focus:bg-white transition shadow-inner pr-12 font-bold text-lg"
+              />
+              <i
+                class="fa-solid fa-eye absolute right-5 top-[44px] text-gray-400 text-xl cursor-pointer hover:text-gray-600 transition"
+                onclick="togglePassword('loginPwd', this)"
+              ></i>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-xl mt-6 transition shadow-lg text-xl"
+            >
+              Đăng nhập
+            </button>
+          </form>
+        </div>
+
+        <div id="stepRegister" class="hidden">
+          <div class="flex justify-between items-center mb-10">
+            <button
+              onclick="showStep('stepChoice')"
+              class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200 transition"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h3 class="font-black text-2xl text-blue-900">Đăng ký</h3>
+            <div class="w-10"></div>
+          </div>
+          <form
+            onsubmit="
+              event.preventDefault();
+              executeAuth();
+            "
+            class="flex flex-col gap-5"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="flex flex-col gap-1.5">
+                <label
+                  class="text-xs font-bold text-gray-500 uppercase tracking-wider"
+                  >Họ Tên *</label
+                ><input
+                  type="text"
+                  required
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none focus:bg-white shadow-inner transition font-medium"
+                />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label
+                  class="text-xs font-bold text-gray-500 uppercase tracking-wider"
+                  >SĐT *</label
+                ><input
+                  type="tel"
+                  required
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none focus:bg-white shadow-inner transition font-medium"
+                />
+              </div>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label
+                class="text-xs font-bold text-gray-500 uppercase tracking-wider"
+                >Email *</label
+              ><input
+                type="email"
+                required
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none focus:bg-white shadow-inner transition font-medium"
+              />
+            </div>
+            <div class="flex flex-col gap-1.5 relative">
+              <label
+                class="text-xs font-bold text-gray-500 uppercase tracking-wider"
+                >Mật khẩu *</label
+              ><input
+                type="password"
+                id="regPwd"
+                required
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none pr-10 font-medium"
+              /><i
+                class="fa-solid fa-eye absolute right-4 top-[38px] text-gray-400 cursor-pointer"
+                onclick="togglePassword('regPwd', this)"
+              ></i>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-xl mt-2 transition shadow-lg text-lg"
+            >
+              Tạo tài khoản
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const modal = document.getElementById("authModal");
+      const modalBox = document.getElementById("modalBox");
+
+      function togglePassword(inputId, icon) {
+        const input = document.getElementById(inputId);
+        if (input.type === "password") {
+          input.type = "text";
+          icon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+          input.type = "password";
+          icon.classList.replace("fa-eye-slash", "fa-eye");
+        }
+      }
+
+      function openAuthModal(step = "stepChoice") {
+        modal.classList.remove("opacity-0", "invisible");
+        modalBox.classList.remove("scale-95");
+        modalBox.classList.add("scale-100");
+        showStep(step);
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modal.classList.add("opacity-0", "invisible");
+        modalBox.classList.add("scale-95");
+        modalBox.classList.remove("scale-100");
+        document.body.style.overflow = "";
+      }
+
+      function showStep(stepId) {
+        ["stepChoice", "stepLogin", "stepRegister"].forEach((id) => {
+          document.getElementById(id).classList.add("hidden");
+        });
+        document.getElementById(stepId).classList.remove("hidden");
+      }
+
+      function executeAuth() {
+        closeModal();
+        document.getElementById("navUnlogged").classList.add("hidden");
+        const navLogged = document.getElementById("navLogged");
+        navLogged.classList.remove("hidden");
+        navLogged.classList.add("flex");
+      }
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      // Script điều khiển UI thả rông hoàn toàn, xóa khóa trang
+      function handleLogout() {
+        document.getElementById("navLogged").classList.add("hidden");
+        document.getElementById("navLogged").classList.remove("flex");
+        const navUnlogged = document.getElementById("navUnlogged");
+        navUnlogged.classList.remove("hidden");
+        navUnlogged.classList.add("flex");
+      }
+    </script>
+  </body>
+</html>
