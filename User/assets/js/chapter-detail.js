@@ -13,7 +13,7 @@ async function loadChapterDetail() {
     }
 
     const response = await fetch(
-      `https://unchanneled-marcy-unnegotiated.ngrok-free.dev/courses/chapter/${chapterId}`
+      `https://unchanneled-marcy-unnegotiated.ngrok-free.dev/courses/chapter/${chapterId}`,
     );
 
     if (!response.ok) {
@@ -58,7 +58,10 @@ async function loadChapterDetail() {
       const sectionsHtml = (lesson.sections || [])
         .map((section, secIndex) => {
           const isComplete =
-            section.complete ?? section.completed ?? section.isComplete ?? false;
+            section.complete ??
+            section.completed ??
+            section.isComplete ??
+            false;
 
           return `
             <div
@@ -146,21 +149,27 @@ function bindAccordion() {
 document.addEventListener("DOMContentLoaded", loadChapterDetail);
 
 async function checkLoginSession() {
-    try {
-      const response = await fetch("https://unchanneled-marcy-unnegotiated.ngrok-free.dev/user/me", {
+  try {
+    const response = await fetch(
+      "https://unchanneled-marcy-unnegotiated.ngrok-free.dev/user/me",
+      {
         method: "GET",
-        credentials: "include"
-      });
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+        credentials: "include",
+      },
+    );
 
-      if (!response.ok) {
-        window.location.href = "index.html";
-        return;
-      }
-
-      const user = await response.json();
-      console.log("Đã đăng nhập:", user);
-    } catch (error) {
-      console.error("Lỗi kiểm tra session:", error);
+    if (!response.ok) {
       window.location.href = "index.html";
+      return;
     }
+
+    const user = await response.json();
+    console.log("Đã đăng nhập:", user);
+  } catch (error) {
+    console.error("Lỗi kiểm tra session:", error);
+    window.location.href = "index.html";
   }
+}

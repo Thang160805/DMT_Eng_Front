@@ -132,7 +132,7 @@ function renderSectionList(currentSection, sections, lessonId) {
 
 function renderNavigation(currentSection, sections, lessonId) {
   const currentIndex = sections.findIndex(
-    (s) => Number(s.id) === Number(currentSection.id)
+    (s) => Number(s.id) === Number(currentSection.id),
   );
 
   const prevSection = currentIndex > 0 ? sections[currentIndex - 1] : null;
@@ -163,7 +163,8 @@ function renderSectionPage(data, lessonId) {
     ? [...data.SectionByLessonId].sort((a, b) => a.position - b.position)
     : [];
 
-  const lessonName = data.lesson_title || `Lesson ${data.lesson_id || lessonId}`;
+  const lessonName =
+    data.lesson_title || `Lesson ${data.lesson_id || lessonId}`;
 
   lessonTitle.textContent = lessonName;
   breadcrumbTitle.textContent = lessonName;
@@ -235,21 +236,27 @@ backBtn?.addEventListener("click", function (e) {
 document.addEventListener("DOMContentLoaded", loadSection);
 
 async function checkLoginSession() {
-    try {
-      const response = await fetch("https://unchanneled-marcy-unnegotiated.ngrok-free.dev/user/me", {
+  try {
+    const response = await fetch(
+      "https://unchanneled-marcy-unnegotiated.ngrok-free.dev/user/me",
+      {
         method: "GET",
-        credentials: "include"
-      });
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+        credentials: "include",
+      },
+    );
 
-      if (!response.ok) {
-        window.location.href = "index.html";
-        return;
-      }
-
-      const user = await response.json();
-      console.log("Đã đăng nhập:", user);
-    } catch (error) {
-      console.error("Lỗi kiểm tra session:", error);
+    if (!response.ok) {
       window.location.href = "index.html";
+      return;
     }
+
+    const user = await response.json();
+    console.log("Đã đăng nhập:", user);
+  } catch (error) {
+    console.error("Lỗi kiểm tra session:", error);
+    window.location.href = "index.html";
   }
+}

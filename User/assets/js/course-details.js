@@ -62,7 +62,9 @@ function getStyleBySkill(skill) {
 
 async function loadCoursesWithChapters() {
   try {
-    const response = await fetch("https://unchanneled-marcy-unnegotiated.ngrok-free.dev/courses");
+    const response = await fetch(
+      "https://unchanneled-marcy-unnegotiated.ngrok-free.dev/courses",
+    );
     const courses = await response.json();
 
     const courseWrapper = document.getElementById("courseWrapper");
@@ -137,21 +139,27 @@ async function loadCoursesWithChapters() {
 loadCoursesWithChapters();
 
 async function checkLoginSession() {
-    try {
-      const response = await fetch("https://unchanneled-marcy-unnegotiated.ngrok-free.dev/user/me", {
+  try {
+    const response = await fetch(
+      "https://unchanneled-marcy-unnegotiated.ngrok-free.dev/user/me",
+      {
         method: "GET",
-        credentials: "include"
-      });
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+        credentials: "include",
+      },
+    );
 
-      if (!response.ok) {
-        window.location.href = "index.html";
-        return;
-      }
-
-      const user = await response.json();
-      console.log("Đã đăng nhập:", user);
-    } catch (error) {
-      console.error("Lỗi kiểm tra session:", error);
+    if (!response.ok) {
       window.location.href = "index.html";
+      return;
     }
+
+    const user = await response.json();
+    console.log("Đã đăng nhập:", user);
+  } catch (error) {
+    console.error("Lỗi kiểm tra session:", error);
+    window.location.href = "index.html";
   }
+}
