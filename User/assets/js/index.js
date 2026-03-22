@@ -3,7 +3,7 @@ async function executeAuth() {
   const Password = document.getElementById("loginPwd").value.trim();
 
   try {
-    const response = await fetch("http://localhost:8080/user/check", {
+    const response = await fetch("https://unchanneled-marcy-unnegotiated.ngrok-free.dev/user/check", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -62,7 +62,7 @@ function getStyleBySkill(skill) {
 
 async function loadCoursesWithChapters() {
   try {
-    const response = await fetch("http://localhost:8080/courses");
+    const response = await fetch("https://unchanneled-marcy-unnegotiated.ngrok-free.dev/courses");
     const courses = await response.json();
 
     const courseWrapper = document.getElementById("courseWrapper");
