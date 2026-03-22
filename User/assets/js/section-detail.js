@@ -1,4 +1,4 @@
-const API_ROOT = "http://localhost:8080";
+const API_ROOT = "https://unchanneled-marcy-unnegotiated.ngrok-free.dev";
 
 const btnLessonList = document.getElementById("btnLessonList");
 const dropdownLessonList = document.getElementById("dropdownLessonList");

@@ -13,7 +13,7 @@ async function loadChapterDetail() {
     }
 
     const response = await fetch(
-      `http://localhost:8080/courses/chapter/${chapterId}`
+      `https://unchanneled-marcy-unnegotiated.ngrok-free.dev/courses/chapter/${chapterId}`
     );
 
     if (!response.ok) {
