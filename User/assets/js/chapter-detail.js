@@ -144,3 +144,23 @@ function bindAccordion() {
 }
 
 document.addEventListener("DOMContentLoaded", loadChapterDetail);
+
+async function checkLoginSession() {
+    try {
+      const response = await fetch("http://localhost:8080/user/me", {
+        method: "GET",
+        credentials: "include"
+      });
+
+      if (!response.ok) {
+        window.location.href = "../User/index.html";
+        return;
+      }
+
+      const user = await response.json();
+      console.log("Đã đăng nhập:", user);
+    } catch (error) {
+      console.error("Lỗi kiểm tra session:", error);
+      window.location.href = "../User/index.html";
+    }
+  }
