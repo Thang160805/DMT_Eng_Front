@@ -6,7 +6,8 @@ async function executeAuth() {
     const response = await fetch("https://unchanneled-marcy-unnegotiated.ngrok-free.dev/user/check", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true"
       },
       credentials: "include", // 🔥 QUAN TRỌNG
       body: JSON.stringify({
