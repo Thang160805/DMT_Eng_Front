@@ -21,7 +21,7 @@ async function executeAuth() {
       alert(data.message || "Đăng nhập thành công");
 
       localStorage.setItem("user", JSON.stringify(data.user));
-      window.location.href = "../User/home.html";
+      window.location.href = "home.html";
     } else {
       alert(data.message || "Sai số điện thoại hoặc mật khẩu");
     }
